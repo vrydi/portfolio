@@ -1,11 +1,11 @@
 <template>
-  <div class="navbar w-full">
+  <div class="navbar w-full" :class="{ mobile: isMobile() }">
     <img src="@/assets/images/logo.png" width="24" height="24" alt="" />
     <h1 class="text-3xl font-bold text-center">Vrydi Oudewaal</h1>
     <UNavigationMenu
       :items="items"
       class="w-full justify-center navbar"
-      :orientation="$device.isMobile ? 'vertical' : 'horizontal'"
+      :orientation="isMobile() ? 'vertical' : 'horizontal'"
       :collapse="collapse"
       collapsible
       @click:collapse="toggleCollapse"
@@ -30,6 +30,12 @@ const activeURL = useRoute().path;
 const isActive = (item: NavigationMenuItem) => {
   return item.to === activeURL;
 };
+
+function isMobile() {
+  const regex =
+    /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  return regex.test(navigator.userAgent);
+}
 
 const items = ref<NavigationMenuItem[]>([
   {
@@ -73,5 +79,10 @@ const toggleCollapse = () => {
   gap: 1rem;
   padding: 0 1rem;
   white-space: nowrap;
+}
+
+.mobile {
+  flex-direction: column;
+  gap: 0.5rem;
 }
 </style>
