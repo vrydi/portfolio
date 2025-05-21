@@ -4,13 +4,15 @@
       <article class="hero-text">
         <p class="small subheader">Front-end developer</p>
         <h1 class="title">
-          Hello, my name is <br /><span class="highlight">Vrydi Oudewaal</span>
+          Hello, my name is <br /><span class="highlight-secondary"
+            >Vrydi Oudewaal</span
+          >
         </h1>
         <p>
           I am a young developer with a passion anything front-end related.
           <br />I care about the little things as well as the bigger ones. As my
           motto says
-          <span class="highlight">"Every byte counts"</span>
+          <span class="highlight-secondary">"Every byte counts"</span>
         </p>
 
         <div class="buttons">
@@ -51,7 +53,7 @@
 
 <script setup lang="ts"></script>
 
-<style>
+<style scoped>
 main {
   display: flex;
   justify-content: center;
@@ -63,22 +65,6 @@ main {
 section {
   width: 50%;
   padding: 2rem;
-}
-
-.small {
-  font-size: 0.8rem;
-}
-
-.subheader {
-  color: var(--secondary);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  font-style: italic;
-}
-
-.highlight {
-  color: var(--secondary);
 }
 
 .hero {
