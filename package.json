@@ -14,9 +14,15 @@
     "@nuxt/icon": "^1.13.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "^3.1.2",
+    "@nuxtjs/device": "^3.2.4",
     "nuxt": "^3.17.3",
     "typescript": "^5.8.3",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@iconify-json/ion": "^1.2.3",
+    "@iconify-json/lets-icons": "^1.2.1",
+    "@iconify-json/material-symbols": "^1.2.21"
   }
 }

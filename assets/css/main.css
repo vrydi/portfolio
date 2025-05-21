@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+    --background-light: #F2F0EF;
+    --ui-primary: #21E6EE;
+    --background-primary: #a6f5f8;
+    --ui-secondary: #05668D;
+    --ui-tertiary: #F0F3BD;
+
+    --primary: #21E6EE;
+    --secondary: #05668D;
+    --tertiary: #F0F3BD;
+}
+
+body {
+    background-color: var(--background-light);
+    position: relative;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
