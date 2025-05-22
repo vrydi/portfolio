@@ -6,9 +6,6 @@
       :items="items"
       class="w-full justify-center navbar"
       :orientation="isMobile() ? 'vertical' : 'horizontal'"
-      :collapse="collapse"
-      collapsible
-      @click:collapse="toggleCollapse"
       highlight
       color="secondary"
     >
@@ -26,9 +23,9 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
 
-const activeURL = useRoute().path;
+const activeURL = ref("/");
 const isActive = (item: NavigationMenuItem) => {
-  return item.to === activeURL;
+  return item.to === useRoute().path;
 };
 
 function isMobile() {
@@ -64,11 +61,20 @@ const items = ref<NavigationMenuItem[]>([
   },
 ]);
 
-const collapse = ref(false);
+// Get the router and route instances
+const router = useRouter();
+const route = useRoute();
 
-const toggleCollapse = () => {
-  collapse.value = !collapse.value;
-};
+// Watch for route changes and update the active URL
+watch(
+  () => route.path,
+  (newPath) => {
+    activeURL.value = newPath;
+    items.value.forEach((item) => {
+      item.active = item.to === newPath;
+    });
+  }
+);
 </script>
 
 <style>
