@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     nodemailer: {
       host: "smtp-mail.outlook.com",
       port: 587,
-      secure: false,
+      secure: true,
       auth: {
         user: "vrydi.oudewaal@outlook.com",
         pass: process.env.NUXT_NODEMAILER_AUTH_PASS,
