@@ -27,6 +27,8 @@
   "devDependencies": {
     "@iconify-json/ion": "^1.2.3",
     "@iconify-json/lets-icons": "^1.2.1",
-    "@iconify-json/material-symbols": "^1.2.21"
+    "@iconify-json/material-symbols": "^1.2.21",
+    "nodemailer": "^6.10.1",
+    "nuxt-nodemailer": "^1.1.2"
   }
 }

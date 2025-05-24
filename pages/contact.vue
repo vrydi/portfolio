@@ -1,24 +1,19 @@
 <template>
   <div class="page h-full">
     <UCard class="mt-6 form">
-      <UForm
-        :schema="schema"
-        :state="state"
-        class="space-y-4"
-        @submit="onSubmit"
-        id="form"
-      >
+      <UForm :state="state" class="space-y-4" @submit="onSubmit" id="form">
+        <UFormField label="name" name="name">
+          <UInput v-model="state.name" type="name" />
+        </UFormField>
+
         <UFormField label="Email" name="email">
           <UInput v-model="state.email" />
         </UFormField>
 
-        <UFormField label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
-        </UFormField>
+        <UTextarea placeholder="Type something..." v-model="state.message" />
 
         <NuxtTurnstile v-model="token" />
-        <button @click="turnstile.reset()">Reset token in template</button>
-        <button @click="reset()">Reset token from handler</button>
+        <UButton type="submit"> Submit </UButton>
       </UForm>
     </UCard>
   </div>
@@ -29,30 +24,37 @@ import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
 
 const token = ref("");
-const turnstile = ref();
 
-function reset() {
-  turnstile.value?.reset();
-}
+// const schema = z.object({
+//   email: z.string().email("Invalid email"),
+//   name: z.string(),
+//   message: z.string().min(8, "Must be at least 8 characters"),
+// });
 
-const schema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(8, "Must be at least 8 characters"),
-});
-
-type Schema = z.output<typeof schema>;
+// type Schema = z.output<typeof schema>;
 
 const state = reactive<Partial<Schema>>({
   email: undefined,
-  password: undefined,
+  name: undefined,
+  message: undefined,
 });
 
 const toast = useToast();
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit() {
   toast.add({
     title: "Success",
     description: "The form has been submitted.",
     color: "success",
+  });
+
+  await $fetch("/api/mail", {
+    method: "POST",
+    body: {
+      name: state.name,
+      email: state.email, // for reply-to
+      subject: "Contact Request",
+      text: state.message,
+    },
   });
 }
 </script>

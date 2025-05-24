@@ -9,15 +9,25 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/device",
     "@nuxtjs/turnstile",
+    "nuxt-nodemailer",
   ],
   turnstile: {
     siteKey: "0x4AAAAAABeeD4mJ6Rt54XI4",
   },
   runtimeConfig: {
+    nodemailer: {
+      host: "smtp-mail.outlook.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "vrydi.oudewaal@outlook.com",
+        pass: process.env.NUXT_NODEMAILER_AUTH_PASS,
+      },
+    },
     turnstile: {
       // This can be overridden at runtime via the NUXT_TURNSTILE_SECRET_KEY
       // environment variable.
-      secretKey: "0x4AAAAAABeeD-zYSrxICgdMKKkUq7hAU5I",
+      secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
     },
   },
   components: [
