@@ -10,12 +10,14 @@ export default defineNuxtConfig({
     "@nuxtjs/device",
     "@nuxtjs/turnstile",
   ],
+  turnstile: {
+    siteKey: "6LdM2UcrAAAAAEg5ySgOpQ1We95HJIbsdhMPi8LG",
+  },
   runtimeConfig: {
     turnstile: {
       // This can be overridden at runtime via the NUXT_TURNSTILE_SECRET_KEY
       // environment variable.
       secretKey: "6LdM2UcrAAAAAMUS67EmbXdML8lKkxV1fT6zUgnm",
-      siteKey: "6LdM2UcrAAAAAEg5ySgOpQ1We95HJIbsdhMPi8LG",
     },
   },
   components: [
