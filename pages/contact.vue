@@ -1,7 +1,13 @@
 <template>
   <div class="page h-full">
     <UCard class="mt-6 form">
-      <UForm :state="state" class="space-y-4" @submit="onSubmit" id="form">
+      <UForm
+        :schema="schema"
+        :state="state"
+        class="space-y-4"
+        @submit="onSubmit"
+        id="form"
+      >
         <UFormField label="name" name="name">
           <UInput v-model="state.name" type="name" />
         </UFormField>
@@ -25,13 +31,13 @@ import type { FormSubmitEvent } from "@nuxt/ui";
 
 const token = ref("");
 
-// const schema = z.object({
-//   email: z.string().email("Invalid email"),
-//   name: z.string(),
-//   message: z.string().min(8, "Must be at least 8 characters"),
-// });
+const schema = z.object({
+  email: z.string().email("Invalid email"),
+  name: z.string(),
+  message: z.string().min(8, "Must be at least 8 characters"),
+});
 
-// type Schema = z.output<typeof schema>;
+type Schema = z.output<typeof schema>;
 
 const state = reactive<Partial<Schema>>({
   email: undefined,
@@ -40,7 +46,7 @@ const state = reactive<Partial<Schema>>({
 });
 
 const toast = useToast();
-async function onSubmit() {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({
     title: "Success",
     description: "The form has been submitted.",

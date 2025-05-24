@@ -1,8 +1,8 @@
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
   const { sendMail } = useNodeMailer();
 
   try {
-    sendMail({
+    return sendMail({
       subject: "Nuxt + nodemailer",
       text: "Hello from nuxt-nodemailer!",
       to: "vrydi.oudewaal@outlook.com",
