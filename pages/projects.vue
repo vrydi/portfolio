@@ -7,11 +7,10 @@
           <div class="content">
             <h3 class="text-2xl font-bold">Discord bot</h3>
             <p>
-              A bot made for discord for a private server. it is a bot that
-              handles server verification, team management, and a few other
-              things. It is a bot that I made in my spare time.
-              <br /><br />
-              The project was made with Discord.ts and is still in development.
+              A bot made for discord for a private server that handles server
+              verification, team management, and a few other things. This bot
+              was made in my spare time utilizing Discord.ts and is still in
+              development.
             </p>
             <UButton
               :to="'https://github.com/vrydi/awoo_tg'"
@@ -29,10 +28,10 @@
           <div class="content">
             <h3 class="text-2xl font-bold">Elsyum, a DND website</h3>
             <p>
-              A personal project for ou DND campaign. It features quest
-              tracking, session tracking, map tracking, note taking, and so much
-              more. itr is made using vue.js and vue.ts, with a backend made
-              using node.js and express.js.
+              A personal project for our DND campaign featuring quest tracking,
+              session tracking, map tracking, note taking, and so much more. The
+              frontend uses vue.js and vue.ts with node.js and express.js as the
+              backend.
             </p>
             <UButton
               :to="'https://github.com/vrydi/elsyum-vue'"
@@ -57,12 +56,13 @@
             <p>
               A school project I made in which you can battle a pregenerated
               team using a randomly generated team of pokemon. The project was
-              made using React.js and was a great way to learn the basics of
-              React.js. It includes GIT, GH-pages, localstorage, PWA and is thus
-              installable and playable without the need of a browser after an
-              initial install.
-              <br /><br />
-              This project earned me the maximum of the points for the project.
+              made using React.js and was a great way to learn the basics. It
+              includes GIT, GH-pages, localstorage, PWA and is thus installable
+              and playable without the need of a browser after an initial
+              install.
+              <br />
+              <br />
+              I received maximum points for this project.
             </p>
             <UButton
               :to="'https://vrydi.github.io/pokemon_battle/'"
@@ -88,14 +88,15 @@
           <div class="content">
             <h3 class="text-2xl font-bold">Uno game</h3>
             <p>
-              A project that I made in my spare time. It is a game of Uno that
-              can be played offline due to the PWA functrionality. It is a great
-              way to pass some time with some others.
-              <br /><br />
+              A project that I made in my spare time is the game Uno that can be
+              played offline due to the PWA functionality. It is a great way to
+              spend some time with others.
+              <br />
+              <br />
               The project was made using React.js and has PWA functionality,
               allowing it to be installed and played without the need of a
               browser after an initial install. It includes GIT, GH-pages,
-              service worker notifications and bootstrap
+              service worker notifications and bootstrap.
             </p>
             <UButton
               :to="'https://vrydi.github.io/uno-pwa/'"
@@ -121,11 +122,12 @@
           <div class="content">
             <h3 class="text-2xl font-bold">Tic tac toe game</h3>
             <p>
-              A small project that I made in my spare time. It is a very simple
-              game of Tic tac toe
-              <br /><br />
+              A small project that I made in my spare time is a very simple game
+              of Tic Tac Toe.
+              <br />
+              <br />
               The project was made using React.js, GIT and is hosted on
-              Cloudfare under my domain.
+              Cloudflare under my domain.
             </p>
             <UButton
               :to="'https://tic-tac-toe.vrydi.dev'"
@@ -171,5 +173,11 @@
 
 .project-card:nth-child(2n) .project .content {
   order: 2;
+}
+
+@media screen and (max-width: 768px) {
+  .project {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

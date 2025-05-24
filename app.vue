@@ -5,7 +5,7 @@ import { Navbar } from "#components";
 <template>
   <div>
     <navbar />
-    <UContainer>
+    <UContainer class="h-full">
       <NuxtPage />
     </UContainer>
   </div>
