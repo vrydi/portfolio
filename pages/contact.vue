@@ -16,14 +16,9 @@
           <UInput v-model="state.password" type="password" />
         </UFormField>
 
-        <button
-          class="g-recaptcha"
-          data-sitekey="6LdM2UcrAAAAAEg5ySgOpQ1We95HJIbsdhMPi8LG"
-          data-callback="onSubmit"
-          data-action="submit"
-        >
-          Submit
-        </button>
+        <NuxtTurnstile v-model="token" />
+        <button @click="turnstile.reset()">Reset token in template</button>
+        <button @click="reset()">Reset token from handler</button>
       </UForm>
     </UCard>
   </div>
@@ -33,13 +28,12 @@
 import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
 
-import { onMounted } from "vue";
+const token = ref("");
+const turnstile = ref();
 
-onMounted(() => {
-  const script = document.createElement("script");
-  script.src = "https://www.google.com/recaptcha/api.js";
-  document.body.appendChild(script);
-});
+function reset() {
+  turnstile.value?.reset();
+}
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -54,8 +48,7 @@ const state = reactive<Partial<Schema>>({
 });
 
 const toast = useToast();
-async function onSubmit(token: string) {
-  (document.getElementById("form") as HTMLFormElement)?.submit();
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({
     title: "Success",
     description: "The form has been submitted.",

@@ -8,7 +8,16 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxtjs/device",
+    "@nuxtjs/turnstile",
   ],
+  runtimeConfig: {
+    turnstile: {
+      // This can be overridden at runtime via the NUXT_TURNSTILE_SECRET_KEY
+      // environment variable.
+      secretKey: "6LdM2UcrAAAAAMUS67EmbXdML8lKkxV1fT6zUgnm",
+      siteKey: "6LdM2UcrAAAAAEg5ySgOpQ1We95HJIbsdhMPi8LG",
+    },
+  },
   components: [
     {
       path: "~/components",
