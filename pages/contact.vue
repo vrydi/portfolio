@@ -16,10 +16,18 @@
           <UInput v-model="state.email" />
         </UFormField>
 
-        <UTextarea placeholder="Type something..." v-model="state.message" />
+        <UFormField label="Phone" name="phone">
+          <UInput v-model="state.phone" />
+        </UFormField>
+
+        <UFormField label="Company" name="company">
+          <UInput v-model="state.company" />
+        </UFormField>
+
+        <UTextarea placeholder="Type something..." v-model="state.request" />
 
         <NuxtTurnstile v-model="token" />
-        <UButton type="submit"> Submit </UButton>
+        <UButton type="submit" color="secondary"> Submit </UButton>
       </UForm>
     </UCard>
   </div>
@@ -34,7 +42,9 @@ const token = ref("");
 const schema = z.object({
   email: z.string().email("Invalid email"),
   name: z.string(),
-  message: z.string().min(8, "Must be at least 8 characters"),
+  request: z.string(),
+  phone: z.string().optional(),
+  company: z.string().optional(),
 });
 
 type Schema = z.output<typeof schema>;
@@ -42,24 +52,27 @@ type Schema = z.output<typeof schema>;
 const state = reactive<Partial<Schema>>({
   email: undefined,
   name: undefined,
-  message: undefined,
+  request: undefined,
+  company: undefined,
+  phone: undefined,
 });
 
 const toast = useToast();
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const { company, email, name, phone, request } = event.data;
   toast.add({
     title: "Success",
     description: "The form has been submitted.",
     color: "success",
   });
-
-  await $fetch("/api/mail", {
+  await $fetch("/api/send-mail", {
     method: "POST",
     body: {
-      name: state.name,
-      email: state.email, // for reply-to
-      subject: "Contact Request",
-      text: state.message,
+      name,
+      company,
+      email,
+      phone,
+      request,
     },
   });
 }
