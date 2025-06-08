@@ -65,13 +65,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     description: "The form has been submitted.",
     color: "success",
   });
-  const { $mail } = useNuxtApp() as any;
+  // const { $mail } = useNuxtApp() as any;
 
-  $mail.send({
-    from: "John Doe",
-    subject: "Incredible",
-    text: "This is an incredible test message",
-  });
+  // $mail.send({
+  //   from: "John Doe",
+  //   subject: "Incredible",
+  //   text: "This is an incredible test message",
+  // });
 
   // await $fetch("/api/sendMail", {
   //   method: "POST",
