@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     "@nuxtjs/device",
     "@nuxtjs/turnstile",
     "nuxt-nodemailer",
-    "nuxt-mail",
+    // "nuxt-mail",
     // [
     //   "nuxt-mail",
     //   {
