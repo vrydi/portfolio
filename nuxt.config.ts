@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     nodemailer: {
-      from: "portfolio",
+      from: "vrydi.oudewaal@outlook.com",
       host: "smtp-mail.outlook.com",
       port: 587,
       secure: true,
