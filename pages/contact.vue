@@ -73,16 +73,16 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   //   text: "This is an incredible test message",
   // });
 
-  // await $fetch("/api/sendMail", {
-  //   method: "POST",
-  //   body: {
-  //     name,
-  //     company,
-  //     email,
-  //     phone,
-  //     request,
-  //   },
-  // });
+  await $fetch("/api/sendMail", {
+    method: "POST",
+    body: {
+      name,
+      company,
+      email,
+      phone,
+      request,
+    },
+  });
 }
 </script>
 
