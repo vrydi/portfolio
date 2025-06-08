@@ -65,7 +65,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     description: "The form has been submitted.",
     color: "success",
   });
-  await $fetch("/api/send-mail", {
+  await $fetch("/api/sendMail", {
     method: "POST",
     body: {
       name,
