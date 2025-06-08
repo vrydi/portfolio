@@ -8,7 +8,7 @@
         @submit="onSubmit"
         id="form"
       >
-        <UFormField label="name" name="name">
+        <UFormField label="name" name="name" class="w-full">
           <UInput v-model="state.name" type="name" />
         </UFormField>
 
@@ -24,7 +24,14 @@
           <UInput v-model="state.company" />
         </UFormField>
 
-        <UTextarea placeholder="Type something..." v-model="state.request" />
+        <UFormField label="Company" name="company">
+          <UTextarea
+            placeholder="Type something..."
+            v-model="state.request"
+            autoresize
+            required
+          />
+        </UFormField>
 
         <NuxtTurnstile v-model="token" />
         <UButton type="submit" color="secondary"> Submit </UButton>
@@ -42,7 +49,7 @@ const token = ref("");
 const schema = z.object({
   email: z.string().email("Invalid email"),
   name: z.string(),
-  request: z.string(),
+  request: z.string().min(10, "Cannot be empty"),
   phone: z.string().optional(),
   company: z.string().optional(),
 });
@@ -65,30 +72,27 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     description: "The form has been submitted.",
     color: "success",
   });
-  // const { $mail } = useNuxtApp() as any;
+  const { $mail } = useNuxtApp() as any;
 
-  // $mail.send({
-  //   from: "John Doe",
-  //   subject: "Incredible",
-  //   text: "This is an incredible test message",
-  // });
+  const message = `
+    Name: ${name}
+    Company: ${company}
+    Email: ${email}
+    Phone: ${phone}
+    Message: ${request}
+  `;
 
-  await $fetch("/api/sendMail", {
-    method: "POST",
-    body: {
-      name,
-      company,
-      email,
-      phone,
-      request,
-    },
+  $mail.send({
+    from: email,
+    subject: "Portfolio contact request",
+    text: message,
   });
 }
 </script>
 
 <style scoped>
 .form {
-  width: fit-content;
+  width: 350px;
   margin-inline: auto;
 }
 
@@ -97,5 +101,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.inline-flex {
+  display: block;
 }
 </style>

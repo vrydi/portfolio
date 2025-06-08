@@ -9,39 +9,39 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/device",
     "@nuxtjs/turnstile",
-    "nuxt-nodemailer",
+    // "nuxt-nodemailer",
     // "nuxt-mail",
-    // [
-    //   "nuxt-mail",
-    //   {
-    //     message: {
-    //       to: "foo@bar.de",
-    //     },
-    //     smtp: {
-    //       host: "smtp-mail.outlook.com",
-    //       port: 587,
-    //       auth: {
-    //         user: "vrydi.oudewaal@outlook.com",
-    //         pass: process.env.NUXT_NODEMAILER_AUTH_PASS,
-    //       },
-    //     },
-    //   },
-    // ],
+    [
+      "nuxt-mail",
+      {
+        message: {
+          to: process.env.NUXT_MAIL_TARGET,
+        },
+        smtp: {
+          host: process.env.NUXT_MAIL_SMPT,
+          port: process.env.NUXT_MAIL_PORT,
+          auth: {
+            user: process.env.NUXT_MAIL_USERNAME,
+            pass: process.env.NUXT_MAIL_PASSWORD,
+          },
+        },
+      },
+    ],
   ],
   turnstile: {
     siteKey: "0x4AAAAAABeeD4mJ6Rt54XI4",
   },
   runtimeConfig: {
-    nodemailer: {
-      from: "vrydi.oudewaal@outlook.com",
-      host: "smtp-mail.outlook.com",
-      port: 587,
-      secure: true,
-      auth: {
-        user: "vrydi.oudewaal@outlook.com",
-        pass: process.env.NUXT_NODEMAILER_AUTH_PASS,
-      },
-    },
+    // nodemailer: {
+    //   from: "vrydi.oudewaal@outlook.com",
+    //   host: "smtp-mail.outlook.com",
+    //   port: 587,
+    //   secure: true,
+    //   auth: {
+    //     user: "vrydi.oudewaal@outlook.com",
+    //     pass: process.env.NUXT_NODEMAILER_AUTH_PASS,
+    //   },
+    // },
     // mail: {
     //   message: {
     //     to: "vrydi.oudewaal@outlook.com",
