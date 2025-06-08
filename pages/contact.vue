@@ -7,6 +7,7 @@
         class="space-y-4"
         @submit="onSubmit"
         id="form"
+        ref="form"
       >
         <UFormField label="name" name="name" class="w-full">
           <UInput v-model="state.name" type="name" />
@@ -36,6 +37,12 @@
         <NuxtTurnstile v-model="token" />
         <UButton type="submit" color="secondary"> Submit </UButton>
       </UForm>
+      <Toaster
+        :title="toasterTitle"
+        :variant="toasterVariant"
+        :message="toasterMessage"
+        ref="toaster"
+      />
     </UCard>
   </div>
 </template>
@@ -43,8 +50,21 @@
 <script setup lang="ts">
 import * as z from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
+import axios from "axios";
+import Toaster from "~/components/Toaster.vue";
+import { Variants } from "~/assets/utils/enums";
 
 const token = ref("");
+const form = ref<HTMLFormElement | null>(null);
+const toaster = ref<InstanceType<typeof Toaster> | null>(null);
+
+const toasterTitle = ref("");
+const toasterMessage = ref("");
+const toasterVariant = ref(Variants.success);
+
+const showToast = () => {
+  toaster.value?.showToast();
+};
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -64,29 +84,49 @@ const state = reactive<Partial<Schema>>({
   phone: undefined,
 });
 
-const toast = useToast();
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const { company, email, name, phone, request } = event.data;
-  toast.add({
-    title: "Success",
-    description: "The form has been submitted.",
-    color: "success",
-  });
-  const { $mail } = useNuxtApp() as any;
+  axios({
+    url: "https://formspree.io/f/mblygjlo",
+    method: "post",
+    headers: {
+      Accept: "application/json",
+    },
+    data: event.data,
+  }).then((response) => {
+    console.log(response);
+    if ((response.status = 200)) {
+      state.name = "";
+      state.company = "";
+      state.email = "";
+      state.phone = "";
+      state.request = "";
 
-  const message = `
-    Name: ${name}
-    Company: ${company}
-    Email: ${email}
-    Phone: ${phone}
-    Message: ${request}
-  `;
-
-  $mail.send({
-    from: email,
-    subject: "Portfolio contact request",
-    text: message,
+      toasterMessage.value = "Contact request has been successfully submitted";
+      toasterTitle.value = "Success";
+      toasterVariant.value = Variants.success;
+      showToast();
+    } else {
+      toasterMessage.value = "Something went wrong";
+      toasterTitle.value = "Error";
+      toasterVariant.value = Variants.error;
+      showToast();
+    }
   });
+  // const { $mail } = useNuxtApp() as any;
+
+  // const message = `
+  //   Name: ${name}
+  //   Company: ${company}
+  //   Email: ${email}
+  //   Phone: ${phone}
+  //   Message: ${request}
+  // `;
+
+  // $mail.send({
+  //   from: email,
+  //   subject: "Portfolio contact request",
+  //   text: message,
+  // });
 }
 </script>
 

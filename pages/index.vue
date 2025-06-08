@@ -70,9 +70,7 @@
   </section>
 </template>
 
-<script setup lang="ts">
-$fetch("/api/test");
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .cards {
